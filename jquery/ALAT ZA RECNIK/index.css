@@ -1,0 +1,49 @@
+#drag-1, #drag-2 {
+  width: 5%;
+  height: 5%;
+  min-height: 6.5em;
+  margin: 10%;
+  background-color: #29e;
+  color: white;
+  border-radius: 0.75em;
+  padding: 4%;
+  user-select: none;
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+}
+
+
+html, body, .grid-container { height: 100%; margin: 0; }
+
+.grid-container * { 
+ border: 1px solid red;
+ position: relative;
+}
+
+.grid-container *:after { 
+ content:attr(class);
+ position: absolute;
+ top: 0;
+ left: 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "aa bb cc" "tabela1 tabela1 tabela1" "suma1 suma1 suma1" "tabela2 tabela2 tabela2" "suma2 suma2 suma2";
+}
+
+.aa { grid-area: aa; }
+
+.bb { grid-area: bb; }
+
+.cc { grid-area: cc; }
+
+.tabela1 { grid-area: tabela1; }
+
+.suma1 { grid-area: suma1; }
+
+.tabela2 { grid-area: tabela2; }
+
+.suma2 { grid-area: suma2; }
