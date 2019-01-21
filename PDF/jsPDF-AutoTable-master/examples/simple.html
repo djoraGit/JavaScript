@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple example</title>
+	<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>	-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
+	
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<script>
+	 $(document).ready(function () {
+
+    $('body').on('click', '#kreiraj1', function () {
+        //var doc = new jsPDF();
+		var jsPDF  = require('jspdf');
+		require('jspdf-autotable');
+
+        // DATA EXAMPLE - Use this initiation when you hard code data or get dynamic data from an API
+        var columns = ["ID", "Country", "Rank", "Capital"];
+        var data = [
+            [1, "Denmark", 7.526, "Copenhagen"],
+            [2, "Switzerland", 	7.509, "Bern"],
+            [3, "Iceland", 7.501, "Reykjavík"],
+            [4, "Norway", 7.498, "Oslo"],
+            [5, "Finland", 7.413, "Helsinki"]
+        ];
+        
+        // HTML EXAMPLE - Comment out the data example and use this when you want to get a pdf of an html table
+        //var element = document.getElementById('table');
+        //var res = doc.autoTableHtmlToJson(element);
+        //doc.autoTable(res.columns, res.data)
+        
+        //doc.autoTable(columns, data);
+		var doc = new jsPDF();
+		doc.autoTable(columns, data);
+		doc.output("dataurlnewwindow");
+    })
+	
+	$('body').on('click', '#kreiraj', function () {
+	
+		var doc = new jsPDF('p', 'pt');
+
+		var res = doc.autoTableHtmlToJson(document.getElementById("table"));
+		doc.autoTable(res.columns, res.data, {margin: {top: 80}});
+
+		var header = function(data) {
+			doc.setFontSize(18);
+			doc.setTextColor(40);
+			doc.setFontStyle('normal');
+			//doc.addImage(headerImgData, 'JPEG', data.settings.margin.left, 20, 50, 50);
+			doc.text("Testing Report", data.settings.margin.left, 50);
+		};
+
+		var options = {
+			beforePageContent: header,
+			margin: {
+			top: 80
+			},
+			startY: doc.autoTableEndPosY() + 20
+		};
+
+		doc.autoTable(res.columns, res.data, options);
+
+		doc.save("table.pdf");
+	
+	})
+	
+	
+	});	
+</script>
+
+<style>
+    html {
+        box-sizing: border-box;
+    }
+    
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+</style>
+</head>
+
+<body>
+<button id="kreiraj">Generate pdf</button>
+
+<table id="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>Country</th>
+        <th>IP-address</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Donna</td>
+        <td>Moore</td>
+        <td>dmoore0@furl.net</td>
+        <td>China</td>
+        <td>211.56.242.221</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Janice</td>
+        <td>Henry</td>
+        <td>jhenry1@theatlantic.com</td>
+        <td>Ukraine</td>
+        <td>38.36.7.199</td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

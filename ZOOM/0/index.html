@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+    
+    <header>
+      <div class="range">
+        <label>Zoom Level</label>
+        <input type="range" min="0.3" max="3" step="0.1" value="1" list="marks" oninput="scale(this.value)">
+        <datalist id="marks">
+          <option value="1">
+        </datalist>
+      </div>
+    </header>
+    
+    <main>
+      <section class="one">One</section>
+      <section class="two">Two</section>
+      <section class="three">Three</section>
+      <section class="four">Four</section>
+    </main>
+
+  </body>
+
+</html>

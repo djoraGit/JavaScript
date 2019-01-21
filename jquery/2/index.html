@@ -1,0 +1,70 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="HTTPS://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="index.css">
+<script>
+$(function() {
+  function makePin(event, t, l) {
+    var $pin = $("<div>", {
+      class: "pin draggable ui-draggable ui-draggable-handle"
+    }).css({
+      position: "relative",
+      top: (t !== undefined ? t + "px" : "20px"),
+      left: (l !== undefined ? l + "px" : "140px"),
+      disply: "block"
+    }).appendTo(".pin-area");
+    var $pinImage = $("<img>", {
+      src: $(".example-image").attr("src")
+    }).css({
+      height: "70px"
+    }).appendTo($pin);
+    $pin.draggable();
+    return $pin;
+  }
+
+  function getPins() {
+    var pins = [];
+    $(".pin-area .pin").each(function(ind, el) {
+      var pos = $(el).offset();
+      var imgSrc = $("img", el).attr("src");
+      pins.push({
+        top: pos.top,
+        left: pos.left,
+        src: imgSrc
+      });
+    });
+    return pins;
+  }
+
+  function loadPins() {
+    var pins = JSON.parse(localStorage.getItems("pins"));
+    if (pins !== undefined) {
+      $.each(pins, function(k, v) {
+        makePin(null, v.top, v.left);
+      });
+    }
+  }
+
+  $(".pin").on("dragstop", function(e, ui) {
+    localStorage.setItem("pins", JSON.stringify(getPins()));
+  });
+
+  $(".pin-area").mousedown(function(e) {
+    makePin(e);
+  });
+
+  loadPins();
+});
+
+</script>
+</head>
+<body>
+<body>
+
+<div class="pin-area">
+</div>
+<p>Example Pin:</p><img class="example-image" style="height: 70px;" src="https://www.clker.com/cliparts/r/R/m/q/E/6/orange-pin-th.png">
+</body>
+</body>
+</html>

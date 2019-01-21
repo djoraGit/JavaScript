@@ -1,0 +1,35 @@
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<!--<script src='spectrum.js'></script>
+	<link rel='stylesheet' href='spectrum.css' />-->
+	
+	
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js'></script>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css' />
+	
+	
+	<script>
+	$(document).ready(function () {
+		$("#custom").spectrum({
+			color: "#f00",
+			
+			change: function(color) {
+				console.log(color.toHexString()); // #ff0000
+			},
+			
+			show: function(color) {
+				console.log(color.toHexString()); // #ff0000
+			}
+			
+		});
+	});
+	</script>
+</head>
+
+<body>
+	<input type='text' id="custom" />
+	
+</body>
+</html>
