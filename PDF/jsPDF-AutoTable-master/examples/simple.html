@@ -10,9 +10,10 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.0.28/jspdf.plugin.autotable.js"></script>
 	
 	<script>
-	 $(document).ready(function () {
+	$(document).ready(function () {
 
     $('body').on('click', '#kreiraj1', function () {
         //var doc = new jsPDF();
@@ -20,33 +21,36 @@
 		require('jspdf-autotable');
 
         // DATA EXAMPLE - Use this initiation when you hard code data or get dynamic data from an API
-        var columns = ["ID", "Country", "Rank", "Capital"];
-        var data = [
-            [1, "Denmark", 7.526, "Copenhagen"],
-            [2, "Switzerland", 	7.509, "Bern"],
-            [3, "Iceland", 7.501, "Reykjavík"],
-            [4, "Norway", 7.498, "Oslo"],
-            [5, "Finland", 7.413, "Helsinki"]
-        ];
+        //var columns = ["ID", "Country", "Rank", "Capital"];
+        //var data = [
+        //    [1, "Denmark", 7.526, "Copenhagen"],
+        //    [2, "Switzerland", 	7.509, "Bern"],
+        //    [3, "Iceland", 7.501, "Reykjavík"],
+        //    [4, "Norway", 7.498, "Oslo"],
+        //    [5, "Finland", 7.413, "Helsinki"]
+        //];
         
         // HTML EXAMPLE - Comment out the data example and use this when you want to get a pdf of an html table
-        //var element = document.getElementById('table');
-        //var res = doc.autoTableHtmlToJson(element);
-        //doc.autoTable(res.columns, res.data)
+        var element = document.getElementById('table');
+        var res = doc.autoTableHtmlToJson(element);
+        doc.autoTable(res.columns, res.data)
         
-        //doc.autoTable(columns, data);
+        doc.autoTable(columns, data);
 		var doc = new jsPDF();
 		doc.autoTable(columns, data);
 		doc.output("dataurlnewwindow");
     })
 	
 	$('body').on('click', '#kreiraj', function () {
-	
 		var doc = new jsPDF('p', 'pt');
 
 		var res = doc.autoTableHtmlToJson(document.getElementById("table"));
-		doc.autoTable(res.columns, res.data, {margin: {top: 80}});
+		
+		var columns = ["ID", "First name"];
+		
+		doc.autoTable(columns, res.data, {margin: {top: 80}});
 
+/*
 		var header = function(data) {
 			doc.setFontSize(18);
 			doc.setTextColor(40);
@@ -62,13 +66,11 @@
 			},
 			startY: doc.autoTableEndPosY() + 20
 		};
-
+          
 		doc.autoTable(res.columns, res.data, options);
-
+*/		
 		doc.save("table.pdf");
-	
 	})
-	
 	
 	});	
 </script>

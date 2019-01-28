@@ -1,0 +1,29 @@
+/*tr { 
+  page-break-inside: avoid !important;
+}
+
+td { 
+  page-break-inside: avoid !important;
+}*/
+
+/*#customers {
+overflow: visible !important;
+}*/
+/*thead { display: table-header-group; }
+tfoot { display: table-row-group; }
+tr { page-break-inside: avoid; }*/
+
+/*@media print {
+   thead {display: table-header-group;}
+}*/
+
+<style type="text/css">
+ td {
+ padding: 10px;
+ }
+
+th {
+ padding: 10px;
+ background-color: aqua;
+ }
+</style>
